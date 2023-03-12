@@ -294,6 +294,25 @@ ul
 {
     margin-right: 15px;
 }
+/* Page Visitor Counter  */
+.counter {
+    font-size: 14px;
+    color: var(--text-black-900);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    position: absolute;
+    bottom: 0;
+    margin: 5px 5px;
+    padding: 10px 10px;
+}
+.counter .counter-head {
+    margin-right: 15px;
+}
+.counter i {
+    font-size: 14px;
+    margin-right: 15px;
+}
 /* home  */
 .home
 {
@@ -368,6 +387,14 @@ h3.my-profession
     border-radius: 5px;
     height: 400px;
 }
+.home .container .visitor-counter a {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+    border: 1px solid #000;
+}
+
 /* About  */
 .about .about-content
 {
