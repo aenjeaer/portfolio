@@ -301,7 +301,7 @@ ul
     display: flex;
     align-items: center;
     flex-direction: row;
-    position: absolute;
+    position: absolute!important;
     bottom: 0;
     margin: 5px 5px;
     padding: 10px 10px;
@@ -310,7 +310,6 @@ ul
     margin-right: 15px;
 }
 .counter i {
-    font-size: 14px;
     margin-right: 15px;
 }
 /* home  */
