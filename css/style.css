@@ -383,6 +383,7 @@ h3.my-profession
 .home .home-img img
 {
     margin: auto;
+    margin-right: 40px;
     border-radius: 5px;
     height: 400px;
 }
