@@ -109,11 +109,9 @@ const nav = document.querySelector(".nav"),
                 }
             }
 // website items 
-// quiz.addEventListener("onclick", function() {
-//     window.location.href = "quiz.html"
-// })
+
+// quiz IT
 const quiz = document.getElementById('quiz');
 quiz.addEventListener("click", () => {
-    // window.location.href = "quiz.html";
     window.open("quiz.html", "_blank");
 })
