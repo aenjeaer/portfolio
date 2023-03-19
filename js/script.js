@@ -114,5 +114,6 @@ const nav = document.querySelector(".nav"),
 // })
 const quiz = document.getElementById('quiz');
 quiz.addEventListener("click", () => {
-    window.location.href = "quiz.html";
+    // window.location.href = "quiz.html";
+    window.open("quiz.html", "_blank");
 })
