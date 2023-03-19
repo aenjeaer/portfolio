@@ -28,15 +28,19 @@
                 <a href="#">Dashboard</a>
                 <!-- <div class="lang-toggler">
                     <span class="en">English</span>
-                    <input type="checkbox" class="check" onclick="location.href='index2.html'">
+                    <input type="checkbox" class="check">
                     <span class="idn">Bahasa</span>
+                </div> -->
+                <!-- <div class="lang-icon">
+                    <img src="images/eng.png" alt="">
+                    <img src="images/idn.png" alt="">
                 </div> -->
             </div>
             <div class="nav-toggler">
                 <span></span>
             </div>
             <ul class="nav">
-                <li><a href="#home" class="active" id="message"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="#home" class="active"><i class="fa fa-home"></i>Beranda</a></li>
                 <li><a href="#about"><i class="fa fa-user"></i>About</a></li>
                 <li><a href="#website"><i class="fa fa-list"></i>Websites</a></li>
                 <li><a href="#sertification"><i class="fa fa-certificate"></i>Sertification</a></li>
@@ -265,13 +269,13 @@
                     </div>
                     <div class="row">
                         <!-- ===== Website item start ===== -->
-                        <div class="website-item padd-15" id="quiz">
+                        <div class="website-item padd-15">
                             <div class="website-item-inner">
                                 <div class="icon">
-                                    <i class="fa fa-commenting"></i>
+                                    <i class="fa fa-clock"></i>
                                 </div>
-                                <h4>Quiz</h4>
-                                <p>quizzes on programming science. For practice remembering the lecture material that has been taught.</p>
+                                <h4>Working...</h4>
+                                <p>To be launched in March 2023</p>
                             </div>
                         </div>
                         <!-- ===== Website item end ===== -->
@@ -581,6 +585,10 @@
     <script src="js/script.js"></script>
     <script src="js/style-switcher.js"></script>
     <script src="js/visitor-counter.js"></script>
-    <script src="js/lang-toggler.js"></script>
+    <script>
+        window.addEventListener('scroll', () => {
+            console.log('Scrolled!');
+        });
+    </script>
 </body>
 </html>

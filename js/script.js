@@ -108,3 +108,11 @@ const nav = document.querySelector(".nav"),
                     allSection[i].classList.toggle("open");
                 }
             }
+// website items 
+// quiz.addEventListener("onclick", function() {
+//     window.location.href = "quiz.html"
+// })
+const quiz = document.getElementById('quiz');
+quiz.addEventListener("click", () => {
+    window.location.href = "quiz.html";
+})

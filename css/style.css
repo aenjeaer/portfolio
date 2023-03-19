@@ -210,6 +210,83 @@ ul
     top: 0;
     right: 0;
 }
+/* lang toggler  */
+.aside .lang-toggler {
+    position: relative;
+    max-width: 400px;
+    height: 20px;
+    padding: 20px 0;
+    color: #555;
+    font-size: 16px;
+
+    display: flex;
+    justify-content: center;
+    min-height: 70px;
+    overflow: hidden;
+}
+.lang-toggler span {
+    padding: 0px 10px;
+}
+.lang-toggler .content {
+    display: none;
+    margin-top: 20px;
+}
+.lang-toggler .content.contentEnglish {
+    display: block;
+}
+.check {
+    position: relative;
+    width: 45px;
+    height: 12px;
+    bottom: -2px;
+}
+.check:before {
+    content: "";
+    position: absolute;
+    width: 45px;
+    height: 20px;
+    background: #333;
+    border-radius: 25px;
+}
+.check:checked:before {
+    background: #00a1ff;
+}
+.check:after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 25px;
+    transition: 0.25s;
+    border: 2px solid #333;
+    box-sizing: border-box;
+}
+.check:checked:after {
+    left: 25px;
+    border: 2px solid #00a1ff;
+    bottom: -8px;
+}
+/* .check:checked ~ .contentBahasa {
+    display: none;
+} */
+.check:checked ~ .contentEnglish {
+    display: block;
+}
+.en {
+    color: #333;
+    bottom: 0;
+}
+.idn {
+    color: #00a1ff;
+}
+.lang-icon {
+    display: block;
+    max-height: 20px;
+    max-width: 20px;
+}
+/* lang toggler end  */
 .aside .nav-toggler
 {
     height: 40px;
@@ -609,6 +686,7 @@ h3.my-profession
 .website .website-item .website-item-inner:hover
 {
     box-shadow: 0 0 20px rgba(48, 46, 77, 0.15);
+    cursor: pointer;
 }
 .website .website-item .website-item-inner .icon
 {
@@ -650,29 +728,29 @@ h3.my-profession
     color: var(--text-black-700);
     line-height: 25px;
 }
-/* portfolio  */
-.portfolio .container
+/* sertification  */
+.sertification .container
 {
     padding-bottom: 40px;
 }
-.portfolio .portfolio-heading
+.sertification .sertification-heading
 {
     flex: 0 0 100%;
     max-width: 100%;
     margin-bottom: 40px;
 }
-.portfolio .portfolio-heading h2
+.sertification .sertification-heading h2
 {
     color: var(--text-black-900);
     font-weight: 500;
 }
-.portfolio .portfolio-item
+.sertification .sertification-item
 {
     flex: 0 0 33.33%;
     max-width: 33.33%;
     margin-bottom: 30px;
 }
-.portfolio .portfolio-item-inner
+.sertification .sertification-item-inner
 {
     border: 6px solid var(--bg-black-100);
     border-radius: 10px;
@@ -680,7 +758,7 @@ h3.my-profession
     text-transform: uppercase;
     
 }
-.portfolio .portfolio-item-inner .portfolio-img img
+.sertification .sertification-item-inner .sertification-img img
 {
     width: 100%;
     display: block;
