@@ -113,5 +113,10 @@ const nav = document.querySelector(".nav"),
 // quiz IT
 const quiz = document.getElementById('quiz');
 quiz.addEventListener("click", () => {
-    window.open("quiz.html", "_blank");
+    window.open("/portfolio/Quiz/quiz.html", "_blank");
+})
+// quiz IT 2
+const quiz2 = document.getElementById('quiz2');
+quiz2.addEventListener("click", () => {
+    window.open("/portfolio/Quiz/quiz2/quiz2.html", "_blank");
 })
