@@ -396,6 +396,10 @@ ul
     display: flex;
     color: var(--text-black-900);
 }
+.home .schedule {
+    width: 400px;
+    margin: 15px;
+}
 .home .home-info
 {
     flex: 0 0 60%;
@@ -424,7 +428,7 @@ h3.my-profession
 }
 .home-info p
 {
-    margin-bottom: 70px;
+    margin-bottom: 20px;
     font-size: 20px;
     color: var(--text-black-700);
 }
@@ -444,7 +448,7 @@ h3.my-profession
     border-bottom: 10px solid var(--skin-color);
     border-right: 10px solid var(--skin-color);
     right: 20px;
-    bottom: -40px;
+    bottom: 150px;
 }
 .home-img::before
 {
