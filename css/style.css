@@ -397,7 +397,7 @@ ul
     color: var(--text-black-900);
 }
 .home .schedule {
-    width: 400px;
+    width: 480px;
     margin: 15px;
 }
 .home .home-info
@@ -448,7 +448,7 @@ h3.my-profession
     border-bottom: 10px solid var(--skin-color);
     border-right: 10px solid var(--skin-color);
     right: 20px;
-    bottom: 150px;
+    bottom: 160px;
 }
 .home-img::before
 {
