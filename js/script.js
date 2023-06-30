@@ -120,3 +120,8 @@ const quiz2 = document.getElementById('quiz2');
 quiz2.addEventListener("click", () => {
     window.open("/portfolio/Quiz/quiz2/quiz2.html", "_blank");
 })
+// kumpulan matkul
+const kumpulanmatkul = document.getElementById('materikuliah');
+kumpulanmatkul.addEventListener("click", () => {
+    window.open("/portfolio/materikuliah/materikuliah.html", "_blank");
+})
