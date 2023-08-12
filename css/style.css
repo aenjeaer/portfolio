@@ -672,6 +672,27 @@ h3.my-profession
 {
     padding-bottom: 40px;
 }
+.website-text {
+    padding-bottom: 40px;
+}
+.website .website-text
+{
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.website .website-text h3
+{
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: var(--text-black-900);
+}
+.website .website-text p
+{
+    font-size: 16px;
+    line-height: 25px;
+    color: var(--text-black-700);
+}
 .website .website-item
 {
     margin-bottom: 30px;
