@@ -13,7 +13,7 @@
     $password =$_POST['password'];
 
     //Database Connection
-    $conn = new mysqli('anjarwati.site','u1576804_admin','K8R7YjC5afk35@D','db_loginform.session.php');
+    $conn = new mysqli('anjarwati.site','u1576804_admin','K8R7YjC5afk35@D','u1576804_form_login');
     if($conn->connect_error) {
         die('Connection Failed : '.$conn->connect_error);
     }else {
