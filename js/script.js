@@ -125,3 +125,8 @@ const kumpulanmatkul = document.getElementById('materikuliah');
 kumpulanmatkul.addEventListener("click", () => {
     window.open("/portfolio/materikuliah/hidden.html", "_blank");
 })
+// login form
+const loginform = document.getElementById('loginform');
+loginform.addEventListener("click", () => {
+    window.open("/portfolio/loginform/index_loginform.html", "_blank");
+})

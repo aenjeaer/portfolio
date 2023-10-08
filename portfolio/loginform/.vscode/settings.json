@@ -1,0 +1,32 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "anjarwati.site",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Tes Koneksi VSCode",
+            "password": "6Ff@ENUs9d24sdc",
+            "username": "u1576804_admin2",
+            "database": "u1576804_koneksi_dua"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "anjarwati.site",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Koneksi Login Form",
+            "database": "u1576804_form_login",
+            "username": "u1576804_admin",
+            "password": "K8R7YjC5afk35@D"
+        }
+    ]
+}
