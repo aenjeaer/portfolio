@@ -130,3 +130,8 @@ const loginform = document.getElementById('loginform');
 loginform.addEventListener("click", () => {
     window.open("/portfolio/loginform/index_loginform.html", "_blank");
 })
+// belajar parallex effect
+const parallex = document.getElementById('parallex');
+parallex.addEventListener("click", () => {
+    window.open("/portfolio/Home_page_parallex/index_home.html", "_blank");
+})
