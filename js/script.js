@@ -1,10 +1,3 @@
-// ==================== Typing Animation ====================
-var typed = new Typed(".typing",{
-    strings:["Anjarwati"],
-    typeSpeed:100,
-    BackSpeed:60,
-    loop:true
-})
 // ==================== Aside ====================
 const nav = document.querySelector(".nav"),
     navList = nav.querySelectorAll("li"),
@@ -22,7 +15,6 @@ const nav = document.querySelector(".nav"),
                 if(navList[j].querySelector("a").classList.contains("active"))
                 {
                     addBackSection(j);
-                    // allSection[j].classList.add("back-section");
                 }
                 navList[j].querySelector("a").classList.remove("active");
             }
@@ -66,33 +58,6 @@ const nav = document.querySelector(".nav"),
             }
         }
     }
-    document.querySelector(".click-me").addEventListener("click", function() 
-    {
-        const sectionIndex = this.getAttribute("data-section-index");
-        // console.log(sectionIndex);
-        showSection(this);
-        updateNav(this);
-        removeBackSection();
-        addBackSection(sectionIndex);
-    })
-    document.querySelector(".click-me2").addEventListener("click", function() 
-    {
-        const sectionIndex = this.getAttribute("data-section-index");
-        // console.log(sectionIndex);
-        showSection(this);
-        updateNav(this);
-        removeBackSection();
-        addBackSection(sectionIndex);
-    })
-    document.querySelector(".click-me3").addEventListener("click", function() 
-    {
-        const sectionIndex = this.getAttribute("data-section-index");
-        // console.log(sectionIndex);
-        showSection(this);
-        updateNav(this);
-        removeBackSection();
-        addBackSection(sectionIndex);
-    })
     const navTogglerBtn = document.querySelector(".nav-toggler"),
             aside = document.querySelector(".aside");
             navTogglerBtn.addEventListener("click", () => 
@@ -108,6 +73,7 @@ const nav = document.querySelector(".nav"),
                     allSection[i].classList.toggle("open");
                 }
             }
+            
 // website items 
 
 // quiz IT
