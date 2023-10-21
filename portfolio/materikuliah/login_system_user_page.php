@@ -5,7 +5,7 @@
 session_start();
 
 if(!isset($_SESSION['user_name'])){
-   header('location:login_system_login_form.php');
+   header('location:user_page.html');
 }
 
 ?>
