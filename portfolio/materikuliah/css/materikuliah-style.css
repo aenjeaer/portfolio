@@ -537,5 +537,24 @@ a:focus {
   color: #636363;
 }
 
+/* Page Visitor Counter  */
+.counter {
+  font-size: 14px;
+  color: var(--text-black-900);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  position: absolute!important;
+  bottom: 0;
+  margin: 5px 5px;
+  padding: 10px 10px;
+}
+.counter .counter-head {
+  margin-right: 15px;
+}
+.counter i {
+  margin-right: 15px;
+}
+
 /* end footer section*/
 /*# sourceMappingURL=style.css.map */
