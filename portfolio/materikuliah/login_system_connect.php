@@ -37,4 +37,10 @@ if(isset($_POST['submit'])){
    }
 
 };
+
+      if(isset($error)){
+         foreach($error as $error){
+            echo '<span class="error-msg">'.$error.'</span>';
+         };
+      };
 ?>
