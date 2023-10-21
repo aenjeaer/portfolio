@@ -89,7 +89,7 @@ quiz2.addEventListener("click", () => {
 // kumpulan matkul
 const kumpulanmatkul = document.getElementById('materikuliah');
 kumpulanmatkul.addEventListener("click", () => {
-    window.open("/portfolio/materikuliah/login_system_login_form.php", "_blank");
+    window.open("/portfolio/materikuliah/filematkul.html", "_blank");
 })
 // login form
 const loginform = document.getElementById('loginform');
