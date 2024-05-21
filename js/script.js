@@ -79,25 +79,25 @@ const nav = document.querySelector(".nav"),
 // quiz IT
 const quiz = document.getElementById('quiz');
 quiz.addEventListener("click", () => {
-    window.open("/portfolio/Quiz/index.html", "_blank");
+    window.open("/pages/Quiz/quiz.html", "_blank");
 })
 // quiz IT 2
 const quiz2 = document.getElementById('quiz2');
 quiz2.addEventListener("click", () => {
-    window.open("/portfolio/Quiz/quiz2/quiz2.html", "_blank");
+    window.open("/pages/Quiz/quiz2/quiz2.html", "_blank");
 })
 // kumpulan matkul
 const kumpulanmatkul = document.getElementById('materikuliah');
 kumpulanmatkul.addEventListener("click", () => {
-    window.open("/portfolio/materikuliah/login_form.html", "_blank");
+    window.open("/pages/materikuliah/login_form.html", "_blank");
 })
 // login form
 const loginform = document.getElementById('loginform');
 loginform.addEventListener("click", () => {
-    window.open("/portfolio/loginform/index_loginform.html", "_blank");
+    window.open("/pages/loginform/index_loginform.html", "_blank");
 })
 // belajar parallex effect
 const parallex = document.getElementById('parallex');
 parallex.addEventListener("click", () => {
-    window.open("/portfolio/Home_page_parallex/index_home.html", "_blank");
+    window.open("/pages/Home_page_parallex/index_home.html", "_blank");
 })
