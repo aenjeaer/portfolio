@@ -94,7 +94,7 @@ kumpulanmatkul.addEventListener("click", () => {
 // login form
 const loginform = document.getElementById('loginform');
 loginform.addEventListener("click", () => {
-    window.open("/pages/loginform/index_loginform.html", "_blank");
+    window.open("pages/loginform/index_loginform.html", "_blank");
 })
 // belajar parallex effect
 const parallex = document.getElementById('parallex');
