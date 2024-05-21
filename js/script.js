@@ -84,17 +84,17 @@ quiz.addEventListener("click", () => {
 // quiz IT 2
 const quiz2 = document.getElementById('quiz2');
 quiz2.addEventListener("click", () => {
-    window.open("../pages/Quiz/quiz2/quiz2.html", "_blank");
+    window.open("https://aenjeaer.github.io/portfolio/pages/Quiz/quiz2/quiz2.html", "_blank");
 })
 // kumpulan matkul
 const kumpulanmatkul = document.getElementById('materikuliah');
 kumpulanmatkul.addEventListener("click", () => {
-    window.open(".../pages/materikuliah/login_form.html", "_blank");
+    window.open("https://aenjeaer.github.io/portfolio/pages/materikuliah/login_form.html", "_blank");
 })
 // login form
 const loginform = document.getElementById('loginform');
 loginform.addEventListener("click", () => {
-    window.open("pages/loginform/index_loginform.html", "_blank");
+    window.open("https://aenjeaer.github.io/portfolio/pages/loginform/index_loginform.html", "_blank");
 })
 // belajar parallex effect
 const parallex = document.getElementById('parallex');
