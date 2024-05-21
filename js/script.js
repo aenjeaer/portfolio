@@ -79,7 +79,7 @@ const nav = document.querySelector(".nav"),
 // quiz IT
 const quiz = document.getElementById('quiz');
 quiz.addEventListener("click", () => {
-    window.open("/pages/Quiz/quiz.html", "_blank");
+    window.open("../pages/Quiz/quiz.html", "_blank");
 })
 // quiz IT 2
 const quiz2 = document.getElementById('quiz2');
