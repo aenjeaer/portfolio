@@ -99,5 +99,5 @@ loginform.addEventListener("click", () => {
 // belajar parallex effect
 const parallex = document.getElementById('parallex');
 parallex.addEventListener("click", () => {
-    window.open("/../pages/Home_page_parallex/index_home.html", "_blank");
+    window.open("https://aenjeaer.github.io/portfolio/pages/Home_page_parallex/index_home.html", "_blank");
 })
