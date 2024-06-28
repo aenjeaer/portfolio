@@ -101,3 +101,8 @@ const parallex = document.getElementById('parallex');
 parallex.addEventListener("click", () => {
     window.open("https://aenjeaer.github.io/portfolio/pages/Home_page_parallex/index_home.html", "_blank");
 })
+// belajar personality
+const parallex = document.getElementById('personality_test');
+parallex.addEventListener("click", () => {
+    window.open("https://aenjeaer.github.io/portfolio/pages/personality_test/index_home.html", "_blank");
+})
