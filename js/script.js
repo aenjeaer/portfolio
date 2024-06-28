@@ -102,7 +102,7 @@ parallex.addEventListener("click", () => {
     window.open("https://aenjeaer.github.io/portfolio/pages/Home_page_parallex/index_home.html", "_blank");
 })
 // belajar personality
-const parallex = document.getElementById('personality_test');
-parallex.addEventListener("click", () => {
-    window.open("https://aenjeaer.github.io/portfolio/pages/personality_test/index_home.html", "_blank");
+const personality_test = document.getElementById('personality_test');
+personality_test.addEventListener("click", () => {
+    window.open("https://aenjeaer.github.io/portfolio/pages/personality_test/index_personality.html", "_blank");
 })
