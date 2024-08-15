@@ -113,24 +113,25 @@
             var strengths = form.elements['strengths'];
             var weaknesses = form.elements['weaknesses'];
             var scores = { Sanguinis: 0, Koleris: 0, Melankolis: 0, Plegmatis: 0 };
-            var selectedCount = 0;
+            var selectedStrengthsCount = 0;
+            var selectedWeaknessesCount = 0;
 
             for (var i = 0; i < strengths.length; i++) {
                 if (strengths[i].checked) {
                     scores[strengths[i].value]++;
-                    selectedCount++;
+                    selectedStrengthsCount++;
                 }
             }
 
             for (var i = 0; i < weaknesses.length; i++) {
                 if (weaknesses[i].checked) {
                     scores[weaknesses[i].value]++;
-                    selectedCount++;
+                    selectedWeaknessesCount++;
                 }
             }
 
-            if (selectedCount < 5) {
-                alert("Silakan pilih minimal 5 sifat.");
+            if (selectedStrengthsCount < 5 || selectedWeaknessesCount < 5) {
+                alert("Silakan pilih minimal 5 kelebihan dan 5 kelemahan.");
                 return;
             }
 

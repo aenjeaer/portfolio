@@ -106,3 +106,8 @@ const personality_test = document.getElementById('personality_test');
 personality_test.addEventListener("click", () => {
     window.open("https://aenjeaer.github.io/portfolio/pages/personality_test/index_personality.html", "_blank");
 })
+// hapus karakter otomatis
+const personality_test = document.getElementById('text_corrector');
+personality_test.addEventListener("click", () => {
+    window.open("https://aenjeaer.github.io/portfolio/pages/text_corrector/index_autocorrect_text.html", "_blank");
+})
