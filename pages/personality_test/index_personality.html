@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tes Kepribadian</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tes Kepribadian</h1>
+        <form id="personalityTest">
+            <div class="question">
+                <p>Pilih kelebihan yang paling menggambarkan diri Anda:</p>
+                <label><input type="checkbox" name="strengths" value="Sanguinis"> Optimis</label><br>
+                <label><input type="checkbox" name="strengths" value="Sanguinis"> Ceria</label><br>
+                <label><input type="checkbox" name="strengths" value="Sanguinis"> Sosial</label><br>
+                <label><input type="checkbox" name="strengths" value="Sanguinis"> Ekspresif</label><br>
+                <label><input type="checkbox" name="strengths" value="Sanguinis"> Ramah</label><br>
+                <label><input type="checkbox" name="strengths" value="Koleris"> Tegas</label><br>
+                <label><input type="checkbox" name="strengths" value="Koleris"> Percaya diri</label><br>
+                <label><input type="checkbox" name="strengths" value="Koleris"> Pemimpin</label><br>
+                <label><input type="checkbox" name="strengths" value="Koleris"> Ambisius</label><br>
+                <label><input type="checkbox" name="strengths" value="Koleris"> Mandiri</label><br>
+                <label><input type="checkbox" name="strengths" value="Melankolis"> Analitis</label><br>
+                <label><input type="checkbox" name="strengths" value="Melankolis"> Detail-oriented</label><br>
+                <label><input type="checkbox" name="strengths" value="Melankolis"> Pemikir</label><br>
+                <label><input type="checkbox" name="strengths" value="Melankolis"> Perfeksionis</label><br>
+                <label><input type="checkbox" name="strengths" value="Melankolis"> Introvert</label><br>
+                <label><input type="checkbox" name="strengths" value="Plegmatis"> Tenang</label><br>
+                <label><input type="checkbox" name="strengths" value="Plegmatis"> Toleran</label><br>
+                <label><input type="checkbox" name="strengths" value="Plegmatis"> Pendengar yang baik</label><br>
+                <label><input type="checkbox" name="strengths" value="Plegmatis"> Sabar</label><br>
+                <label><input type="checkbox" name="strengths" value="Plegmatis"> Kooperatif</label><br>
+            </div>
+            <div class="question">
+                <p>Pilih kelemahan yang paling menggambarkan diri Anda:</p>
+                <label><input type="checkbox" name="weaknesses" value="Sanguinis"> Mudah bosan</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Sanguinis"> Kurang fokus</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Sanguinis"> Terlalu impulsif</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Sanguinis"> Ceroboh</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Sanguinis"> Terlalu banyak bicara</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Koleris"> Dominan</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Koleris"> Agresif</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Koleris"> Tidak sabar</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Koleris"> Kurang empati</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Koleris"> Otoriter</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Melankolis"> Terlalu kritis</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Melankolis"> Perfeksionis berlebihan</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Melankolis"> Pesimis</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Melankolis"> Sensitif</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Melankolis"> Menarik diri</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Plegmatis"> Pasif</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Plegmatis"> Tidak tegas</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Plegmatis"> Kurang motivasi</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Plegmatis"> Terlalu mengalah</label><br>
+                <label><input type="checkbox" name="weaknesses" value="Plegmatis"> Mudah terpengaruh</label><br>
+            </div>
+            <button type="button" onclick="calculateResult()">Lihat Hasil</button>
+        </form>
+        <div class="result" id="result">
+            <h2>Hasil Tes Anda:</h2>
+            <p id="resultText"></p>
+        </div>
+    </div>
+
+    <script>
+        function calculateResult() {
+            var form = document.getElementById('personalityTest');
+            var strengths = form.elements['strengths'];
+            var weaknesses = form.elements['weaknesses'];
+            var scores = { Sanguinis: 0, Koleris: 0, Melankolis: 0, Plegmatis: 0 };
+            var selectedStrengthsCount = 0;
+            var selectedWeaknessesCount = 0;
+
+            for (var i = 0; i < strengths.length; i++) {
+                if (strengths[i].checked) {
+                    scores[strengths[i].value]++;
+                    selectedStrengthsCount++;
+                }
+            }
+
+            for (var i = 0; i < weaknesses.length; i++) {
+                if (weaknesses[i].checked) {
+                    scores[weaknesses[i].value]++;
+                    selectedWeaknessesCount++;
+                }
+            }
+
+            if (selectedStrengthsCount < 5 || selectedWeaknessesCount < 5) {
+                alert("Silakan pilih minimal 5 kelebihan dan 5 kelemahan.");
+                return;
+            }
+
+            var maxScore = 0;
+            var personality = '';
+
+            for (var key in scores) {
+                if (scores[key] > maxScore) {
+                    maxScore = scores[key];
+                    personality = key;
+                }
+            }
+
+            var resultText = document.getElementById('resultText');
+            resultText.textContent = "Anda adalah tipe kepribadian " + personality + ".";
+            
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Corrector</title>
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+    
+        h1 {
+            text-align: center;
+            font-size: 2.5em; /* Membuat judul lebih besar */
+            color: #333; /* Warna teks lebih tajam */
+            letter-spacing: 2px; /* Spasi antar huruf untuk efek elegan */
+            text-transform: uppercase; /* Huruf besar semua */
+            font-weight: bold; /* Membuat teks lebih menonjol */
+        }
+    
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        
+    
+        select, input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    
+        button:hover {
+            background-color: #45a049;
+        }
+    
+        #resultContainer {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #d4edda;
+            border-left: 6px solid #28a745;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            position: relative;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 8px;
+        }
+    
+        #result {
+            margin-bottom: 10px;
+        }
+    
+        #copyButton {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+    
+        #copyButton:hover {
+            background-color: #218838;
+        }
+    
+        #replaceOption {
+            display: none;
+        }
+
+        /* Tombol kecil untuk "Tambah Kolom Karakter" */
+        .small-button {
+            background-color: #838d87; /* Warna biru yang berbeda */
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .small-button:hover {
+            background-color: #636b66;
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>Smart Text Corrector</h1>
+    <form id="textCorrectorForm">
+        <label for="action">Pilih aksi:</label>
+        <select name="action" id="action" onchange="toggleReplaceOption()">
+            <option value="delete">Hapus Karakter atau Kata</option>
+            <option value="replace">Ganti Karakter atau Kata</option>
+        </select>
+
+        <div id="characterFields">
+            <label for="character">Karakter atau kata yang ingin dihapus/diganti:</label>
+            <input type="text" name="character" class="character" required>
+        </div>
+
+        <button type="button" class="small-button" onclick="addCharacterField()">+ Tambah Kolom</button>
+
+        <div id="replaceOption">
+            <label for="replace_with">Ganti dengan:</label>
+            <input type="text" name="replace_with" id="replace_with">
+        </div>
+
+        <label for="text">Masukkan teks:</label>
+        <textarea name="text" id="text" rows="10" cols="50" required></textarea>
+
+        <button type="button" onclick="correctText()">Koreksi Teks</button>
+    </form>
+
+    <div id="resultContainer" style="display: none;">
+        <div id="result"></div>
+        <button id="copyButton" onclick="copyResult()">Salin</button>
+    </div>
+
+    <script>
+        function toggleReplaceOption() {
+            var action = document.getElementById("action").value;
+            var replaceOption = document.getElementById("replaceOption");
+            if (action === "replace") {
+                replaceOption.style.display = "block";
+            } else {
+                replaceOption.style.display = "none";
+            }
+        }
+
+        // Fungsi untuk menambah kolom input baru
+        function addCharacterField() {
+            var characterFields = document.getElementById("characterFields");
+            var newField = document.createElement("input");
+            newField.type = "text";
+            newField.name = "character";
+            newField.className = "character";
+            newField.placeholder = "Karakter atau kata lainnya...";
+            characterFields.appendChild(newField);
+        }
+
+        // Fungsi untuk melakukan koreksi teks
+        function correctText() {
+            var action = document.getElementById("action").value;
+            var replace_with = document.getElementById("replace_with").value;
+            var text = document.getElementById("text").value;
+
+            var characterInputs = document.getElementsByClassName("character");
+            var characters = [];
+            for (var i = 0; i < characterInputs.length; i++) {
+                characters.push(characterInputs[i].value);
+            }
+
+            var result = text;
+
+            if (action === "delete") {
+                characters.forEach(function(character) {
+                    result = result.split(character).join("");
+                });
+            } else if (action === "replace") {
+                characters.forEach(function(character) {
+                    result = result.split(character).join(replace_with);
+                });
+            }
+
+            document.getElementById("result").innerText = result;
+            document.getElementById("resultContainer").style.display = "block";
+
+            // Scroll otomatis ke hasil koreksi
+            document.getElementById("resultContainer").scrollIntoView({ behavior: "smooth" });
+        }
+
+        // Fungsi untuk menyalin teks hasil
+        function copyResult() {
+            var resultText = document.getElementById("result").innerText;
+            navigator.clipboard.writeText(resultText).then(function() {
+                alert("Teks berhasil disalin ke clipboard!");
+            }, function(err) {
+                alert("Gagal menyalin teks: ", err);
+            });
+        }
+    </script>
+</body>
+</html>
