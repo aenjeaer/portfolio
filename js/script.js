@@ -111,3 +111,8 @@ const text_corrector = document.getElementById('text_corrector');
 text_corrector.addEventListener("click", () => {
     window.open("https://aenjeaer.github.io/portfolio/pages/text_corrector/index_autocorrect_text.html", "_blank");
 })
+// prediksi material otomatis
+const text_corrector = document.getElementById('website-magang');
+text_corrector.addEventListener("click", () => {
+    window.open("https://aenjeaer.github.io/portfolio/pages/website-magang/prediksi-material-otomatis.html", "_blank");
+})
