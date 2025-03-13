@@ -114,5 +114,5 @@ text_corrector.addEventListener("click", () => {
 // prediksi material otomatis
 const prediksi_material = document.getElementById('website-magang');
 prediksi_material.addEventListener("click", () => {
-    window.open("https://aenjeaer.github.io/portfolio/pages/website-magang/prediksi-material-otomatis.html", "_blank");
+    window.open("https://aenjeaer.github.io/portfolio/pages/website_magang/prediksi-material-otomatis.html", "_blank");
 })
