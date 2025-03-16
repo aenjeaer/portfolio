@@ -112,7 +112,7 @@ text_corrector.addEventListener("click", () => {
     window.open("https://aenjeaer.github.io/portfolio/pages/text_corrector/index_autocorrect_text.html", "_blank");
 })
 // prediksi material otomatis
-const prediksi_material = document.getElementById('website-magang');
-prediksi_material.addEventListener("click", () => {
-    window.open("https://aenjeaer.github.io/portfolio/pages/website_magang/prediksi-material-otomatis.html", "_blank");
+const web_magang = document.getElementById('web_magang');
+web_magang.addEventListener("click", () => {
+    window.open("https://aenjeaer.github.io/portfolio/pages/web_magang/index_webmagang.html", "_blank");
 })
