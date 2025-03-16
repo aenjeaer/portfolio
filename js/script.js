@@ -116,3 +116,8 @@ const web_magang = document.getElementById('web_magang');
 web_magang.addEventListener("click", () => {
     window.open("https://aenjeaer.github.io/portfolio/pages/web_magang/index_webmagang.html", "_blank");
 })
+// memento exercise
+const memento_exercise = document.getElementById('memento_exercise');
+memento_exercise.addEventListener("click", () => {
+    window.open("https://aenjeaer.github.io/portfolio/pages/memento_exercise/index_mementoexercise.html", "_blank");
+})

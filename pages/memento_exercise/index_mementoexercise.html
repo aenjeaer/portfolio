@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memento Exercise</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            transition: background 0.5s ease;
+        }
+
+        .page {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 1000px;
+            width: 100%;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .welcome-page h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+        }
+
+        .welcome-page p {
+            color: #666;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .welcome-page button {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .welcome-page button:hover {
+            background: #45a049;
+        }
+
+        .exercise-page {
+            display: none;
+            width: 100%;
+        }
+
+        .exercise-guide {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: left;
+            width: 100%;
+        }
+
+        .exercise-guide h3 {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .exercise-guide ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+            color: #666;
+        }
+
+        .exercise-guide ol li {
+            margin-bottom: 0.5rem;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .column {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            min-height: 400px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .column-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .moment-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            flex: 1;
+        }
+
+        .moment-item {
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .moment-item:hover {
+            background: #f8f9fa;
+        }
+
+        .moment-item.selected {
+            border-color: #4CAF50;
+            background: #e8f5e9;
+        }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #ff6b6b;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.2rem;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .delete-btn:hover {
+            color: #ff4757;
+            transform: scale(1.1);
+        }
+
+        .input-group {
+            margin-top: auto;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .bullet {
+            width: 10px;
+            height: 10px;
+            background: #4CAF50;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .low-moment .bullet {
+            right: -15px;
+        }
+
+        .high-moment .bullet {
+            left: -15px;
+        }
+
+        .congratulations-page {
+            display: none;
+            flex-direction: column;
+            gap: 2rem;
+            animation: fadeIn 1s ease;
+        }
+
+        .congratulations-page h1 {
+            font-size: 3rem;
+            color: #2c3e50;
+            animation: bounce 1s infinite alternate;
+        }
+
+        .congratulations-page p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-20px); }
+        }
+    </style>
+    <!-- LeaderLine Library -->
+    <script src="https://cdn.jsdelivr.net/npm/leader-line@1.0.5/leader-line.min.js"></script>
+</head>
+<body>
+    <div class="page">
+        <!-- Welcome Page -->
+        <div class="welcome-page">
+            <h1>Welcome to Memento Exercise! 🌟</h1>
+            <p>
+                Memento Exercise adalah latihan harian, mingguan, atau bulanan untuk meningkatkan kesadaran diri. 
+                Mulailah dengan menginput <strong>Low Moment</strong> - momen yang membuat kamu sedih atau menangis. 
+                Kemudian tambahkan <strong>High Moment</strong> - momen kebahagiaan dan kesuksesan kamu. 
+                Hubungkan momen-momen tersebut untuk melihat bagaimana pengalaman sulit membawa kamu pada pencapaian yang membahagiakan. 
+                Latihan ini membantu kamu menghindari mental block dan fokus pada masa sekarang.
+            </p>
+            <button onclick="startExercise()">Mulai Latihan</button>
+        </div>
+
+        <!-- Exercise Page -->
+        <div class="exercise-page">
+            <!-- Step-by-Step Guide -->
+            <div class="exercise-guide">
+                <h3>Panduan Memento Exercise:</h3>
+                <ol>
+                    <li><strong>Isi Low Moment</strong>: Tambahkan momen-momen yang membuat kamu sedih atau menangis.</li>
+                    <li><strong>Isi High Moment</strong>: Tambahkan momen-momen kebahagiaan dan kesuksesan kamu.</li>
+                    <li><strong>Tarik Garis</strong>: Hubungkan Low Moment dan High Moment yang dirasa saling terkait.</li>
+                    <li><strong>Refleksikan</strong>: Renungkan bagaimana pengalaman sulit membawa kamu pada pencapaian yang membahagiakan.</li>
+                </ol>
+            </div>
+
+            <div class="container">
+                <!-- Low Moments Column -->
+                <div class="column low-moment">
+                    <div class="column-header">
+                        <h2>😢 Low Moments</h2>
+                    </div>
+                    <div class="moment-list" id="low-list"></div>
+                    <div class="input-group">
+                        <input type="text" id="low-input" placeholder="Tambahkan low moment..." onkeypress="handleKeyPress(event, 'low')">
+                        <button onclick="addMoment('low')">+</button>
+                    </div>
+                </div>
+
+                <!-- High Moments Column -->
+                <div class="column high-moment">
+                    <div class="column-header">
+                        <h2>🎉 High Moments</h2>
+                    </div>
+                    <div class="moment-list" id="high-list"></div>
+                    <div class="input-group">
+                        <input type="text" id="high-input" placeholder="Tambahkan high moment..." onkeypress="handleKeyPress(event, 'high')">
+                        <button onclick="addMoment('high')">+</button>
+                    </div>
+                </div>
+            </div>
+            <button style="margin-top: 2rem;" onclick="finishExercise()">Selesai</button>
+        </div>
+
+        <!-- Congratulations Page -->
+        <div class="congratulations-page">
+            <h1>Alhamdulillah! 🎊</h1>
+            <p>Kamu telah menyelesaikan Memento Exercise. Nikmati harimu dan teruslah berkembang!</p>
+        </div>
+    </div>
+
+    <script>
+        let connections = [];
+        let selected = { low: null, high: null };
+
+        // Page Navigation
+        function startExercise() {
+            document.querySelector('.welcome-page').style.display = 'none';
+            document.querySelector('.exercise-page').style.display = 'block';
+        }
+
+        function finishExercise() {
+            // Hapus semua garis
+            connections.forEach(conn => conn.line.remove());
+            connections = []; // Reset array connections
+
+            // Pindah ke halaman Congratulations
+            document.querySelector('.exercise-page').style.display = 'none';
+            document.querySelector('.congratulations-page').style.display = 'flex';
+            document.body.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+        }
+
+        // Add moment function
+        function addMoment(type) {
+            const input = document.getElementById(`${type}-input`);
+            const text = input.value.trim();
+            if (!text) return;
+
+            const list = document.getElementById(`${type}-list`);
+            const moment = createMomentElement(text, type);
+            list.appendChild(moment);
+            input.value = '';
+        }
+
+        // Handle Enter key press
+        function handleKeyPress(event, type) {
+            if (event.key === 'Enter') {
+                addMoment(type);
+            }
+        }
+
+        // Create moment element
+        function createMomentElement(text, type) {
+            const div = document.createElement('div');
+            div.className = 'moment-item';
+            div.textContent = text;
+            
+            // Add bullet
+            const bullet = document.createElement('div');
+            bullet.className = 'bullet';
+            div.appendChild(bullet);
+
+            // Add delete button
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.innerHTML = '×'; // Ikon "x"
+            deleteBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Mencegah event klik kartu terpicu
+                deleteMoment(div, type);
+            });
+            div.appendChild(deleteBtn);
+            
+            div.addEventListener('click', () => handleSelect(div, type));
+            return div;
+        }
+
+        // Delete moment function
+        function deleteMoment(element, type) {
+            // Hapus semua koneksi yang terkait dengan moment ini
+            connections = connections.filter(conn => {
+                if (conn.low === element || conn.high === element) {
+                    conn.line.remove(); // Hapus garis
+                    return false;
+                }
+                return true;
+            });
+
+            // Hapus moment dari DOM
+            element.remove();
+        }
+
+        // Handle selection logic
+        function handleSelect(element, type) {
+            // Toggle selection
+            element.classList.toggle('selected');
+            
+            // Update selection
+            if (element.classList.contains('selected')) {
+                selected[type] = element;
+            } else {
+                selected[type] = null;
+            }
+
+            // Check if both selected
+            if (selected.low && selected.high) {
+                toggleConnection(selected.low, selected.high);
+                clearSelection();
+            }
+        }
+
+        // Toggle connection (add or remove)
+        function toggleConnection(low, high) {
+            const existingConnection = connections.find(conn => 
+                conn.low === low && conn.high === high
+            );
+
+            if (existingConnection) {
+                // Remove connection
+                existingConnection.line.remove();
+                connections = connections.filter(conn => conn !== existingConnection);
+            } else {
+                // Add new connection
+                const line = new LeaderLine(
+                    low.querySelector('.bullet'),
+                    high.querySelector('.bullet'),
+                    { 
+                        color: '#4CAF50', // Warna garis tetap hijau
+                        size: 2,
+                        path: 'straight', // Garis lurus
+                        startPlug: 'behind', // Hilangkan tanda panah di awal
+                        endPlug: 'behind'   // Hilangkan tanda panah di akhir
+                    }
+                );
+                connections.push({ low, high, line });
+            }
+        }
+
+        // Clear all selections
+        function clearSelection() {
+            document.querySelectorAll('.moment-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            selected = { low: null, high: null };
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            connections.forEach(conn => conn.line.position());
+        });
+    </script>
+</body>
+</html>
