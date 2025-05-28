@@ -60,7 +60,7 @@ ul
 }
 .section.active
 {
-    z-index: 2;
+    z-index: 101;
     opacity: 1;
     animation: slideSection 1s ease;
 }
@@ -171,7 +171,7 @@ ul
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10;
+    z-index: 100;
     transition: all 0.3s ease;
 }
 .aside .logo
@@ -289,20 +289,20 @@ ul
     max-width: 20px;
 }
 /* lang toggler end  */
-.aside .nav-toggler
-{
+.aside .nav-toggler {
     height: 40px;
     width: 45px;
     border: 1px solid var(--bg-black-50);
     cursor: pointer;
     position: fixed;
-    left: 300px;
+    left: 30px;
     top: 20px;
     border-radius: 5px;
     background: var(--bg-black-100);
     display: none;
     align-items: center;
     justify-content: center;
+    z-index: 100; /* Pastikan lebih rendah dari modal */
     transition: all 0.3s ease;
 }
 .aside .nav-toggler span
@@ -583,6 +583,219 @@ ul
     text-align: justify;
     color: var(--text-black-700);
 }
+/* drawings  */
+.drawing .container {
+    padding-bottom: 40px;
+}
+.drawing-text {
+    padding-bottom: 40px;
+    padding-top: 20px;
+}
+.drawing .drawing-text {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.drawing .drawing-text p {
+    font-size: 16px;
+    line-height: 25px;
+    color: var(--text-black-700);
+}
+
+/* Carousel Styles */
+.drawing-carousel {
+    margin: 0 auto 40px;
+    max-width: 800px;
+    position: relative;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    height: 500px;
+    width: 100%;
+}
+
+.carousel-slide {
+    display: flex;
+    transition: transform 0.5s ease;
+    height: 100%;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    min-width: 100%;
+    flex-shrink: 0;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+.slide {
+    position: relative;
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-black-100); /* Background untuk bagian yang kosong */
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.slide-caption h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.slide-caption p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+}
+
+.carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.prev-btn {
+    left: 20px;
+}
+
+.next-btn {
+    right: 20px;
+}
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.carousel-indicators span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ccc;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-indicators span.active {
+    background: var(--skin-color);
+    transform: scale(1.2);
+}
+
+/* Gallery Styles */
+.drawing-gallery {
+    margin-top: 40px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.gallery-item {
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    aspect-ratio: 1/1;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    overflow: auto;
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    display: block;
+    margin: 60px auto;
+    max-width: 90%;
+    max-height: calc(100vh - 120px);
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.close-modal {
+    position: fixed; /* Ganti dari absolute ke fixed */
+    top: 20px;
+    right: 30px;
+    color: #fff;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1101; /* Lebih tinggi dari modal */
+}
+
+.close-modal:hover {
+    color: var(--skin-color);
+    transform: scale(1.2);
+}
+
+.modal-caption {
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 18px;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
 /* website  */
 .website .container
 {
@@ -727,6 +940,7 @@ ul
     .aside .nav-toggler.open
     {
         left: 300px;
+        z-index: 100;
     }
     .section
     {
@@ -740,6 +954,19 @@ ul
     {
         display: block;
         margin-left: 0;
+    }
+}
+@media (max-width: 1199px) {
+    .nav-toggler {
+        display: none; /* Awalnya disembunyikan di mobile */
+    }
+    
+    .nav-toggler.open {
+        display: flex; /* Muncul hanya saat dibutuhkan */
+    }
+    
+    .modal-open .nav-toggler {
+        display: none !important;
     }
 }
 @media (max-width:991px)
@@ -779,4 +1006,89 @@ ul
 .colors
 {
     cursor: pointer;
+}
+/* Video Styles for Carousel */
+.carousel-media {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+video.carousel-media {
+    background-color: #000;
+}
+
+/* Play/Pause Button */
+.play-pause-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.play-pause-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Video Icon in Gallery */
+.gallery-item {
+    position: relative;
+}
+
+.video-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+/* Modal Content Container */
+.modal-content-container {
+    width: 90%;
+    max-width: 900px;
+    margin: 60px auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-media {
+    max-width: 100%;
+    max-height: 80vh;
+    display: block;
+    margin: 0 auto;
+}
+
+video.modal-media {
+    background-color: #000;
+    width: 100%;
+}
+
+/* Hide nav toggler when modal is open */
+.modal-open .nav-toggler {
+    display: none !important;
 }
