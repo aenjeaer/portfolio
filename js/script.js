@@ -123,24 +123,24 @@ const drawingData = [
         id: 1,
         title: "Timelapse Gambar Digital 1",
         date: "11/05/2025",
-        mediaUrl: "videos/menggambar/timelapse110525.mp4",
-        thumbnailUrl: "images/menggambar/110525.png",
+        mediaUrl: "https://aenjeaer.github.io/portfolio/videos/menggambar/timelapse110525.mp4",
+        thumbnailUrl: "https://aenjeaer.github.io/portfolio/images/menggambar/110525.png",
         type: "video"
     },
     {
         id: 2,
         title: "Timelapse Gambar Digital 2",
         date: "13/05/2025",
-        mediaUrl: "videos/menggambar/timelapse130525.mp4",
-        thumbnailUrl: "images/menggambar/130525.png",
+        mediaUrl: "https://aenjeaer.github.io/portfolio/videos/menggambar/timelapse130525.mp4",
+        thumbnailUrl: "https://aenjeaer.github.io/portfolio/images/menggambar/130525.png",
         type: "video"
     },
     {
         id: 3,
         title: "Gambar Digital 3",
         date: "28/05/2025",
-        mediaUrl: "videos/menggambar/timelapse280525.mp4",
-        thumbnailUrl: "images/menggambar/280525.png",
+        mediaUrl: "https://aenjeaer.github.io/portfolio/videos/menggambar/timelapse280525.mp4",
+        thumbnailUrl: "https://aenjeaer.github.io/portfolio/images/menggambar/280525.png",
         type: "video"
     }
 ];
