@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aplikasi BPBL Provinsi Papua Tengah</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 900px;
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    padding: 30px;
+    box-sizing: border-box;
+  }
+
+  h1 {
+    margin-top: 0;
+    font-weight: 700;
+    color: #1e3c72;
+    text-align: center;
+  }
+
+  .app-title {
+    color: #1e3c72;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+
+  .app-subtitle {
+    color: #2a5298;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  .warning-banner {
+    background-color: #fff3cd;
+    border-left: 5px solid #ffc107;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+  }
+
+  form {
+    margin-top: 20px;
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="number"],
+  input[type="file"],
+  input[type="search"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.2s ease;
+  }
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  input[type="number"]:focus,
+  input[type="file"]:focus,
+  input[type="search"]:focus {
+    border-color: #1e3c72;
+    outline: none;
+  }
+
+  button {
+    background-color: #1e3c72;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+  }
+  button:hover {
+    background-color: #2a5298;
+  }
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .logout-btn {
+    background-color: #e25f5f;
+    margin-top: 10px;
+  }
+  .logout-btn:hover {
+    background-color: #b84343;
+  }
+
+  .import-btn {
+    background-color: #28a745;
+    margin-top: 10px;
+  }
+  .import-btn:hover {
+    background-color: #218838;
+  }
+
+  #login-section,
+  #crud-section {
+    display: none;
+  }
+
+  #crud-section.active,
+  #login-section.active {
+    display: block;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  th, td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+
+  th {
+    background-color: #1e3c72;
+    color: white;
+  }
+
+  tr:hover {
+    background-color: #f0f0f0;
+  }
+
+  .action-btn {
+    background-color: #2a5298;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    margin-right: 6px;
+  }
+  .action-btn:hover {
+    background-color: #1e3c72;
+  }
+
+  .error-message {
+    color: #e25f5f;
+    margin-top: 10px;
+    display: none;
+  }
+
+  .import-section {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px dashed #1e3c72;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+
+  .search-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .search-container input {
+    flex-grow: 1;
+  }
+
+  .search-container button {
+    width: auto;
+  }
+
+  .duplicate-nik {
+    background-color: #ffecec;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .container {
+      padding: 20px;
+    }
+    th, td {
+      font-size: 14px;
+      padding: 8px 6px;
+    }
+    button {
+      width: 100%;
+      margin-top: 8px;
+    }
+    .action-btn {
+      margin-bottom: 6px;
+      margin-right: 0;
+    }
+    .form-actions {
+      flex-direction: column;
+      gap: 8px;
+    }
+    .search-container {
+      flex-direction: column;
+    }
+    .search-container button {
+      width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container" role="main">
+    <h1 class="app-title">APLIKASI BPBL</h1>
+    <h2 class="app-subtitle">Provinsi Papua Tengah</h2>
+
+    <!-- Login Section -->
+    <section id="login-section" class="active" aria-label="Login Form">
+      <form id="login-form" aria-describedby="login-desc" novalidate>
+        <p id="login-desc">Silakan masukkan username dan password untuk login.</p>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="admin" autocomplete="username" required aria-required="true" />
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="admin123" required aria-required="true" />
+        <button type="submit">Login</button>
+        <p id="login-error" class="error-message" role="alert"></p>
+      </form>
+    </section>
+
+    <!-- CRUD Section -->
+    <section id="crud-section" aria-label="Data Entry CRUD" tabindex="-1">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+        <button class="logout-btn" id="logout-btn" aria-label="Logout">Logout</button>
+        <button class="import-btn" id="import-toggle-btn" aria-label="Show import section">Import Data</button>
+      </div>
+
+      <div class="warning-banner">
+        <strong>PERHATIAN:</strong> Pastikan data yang dimasukkan sesuai dengan KTP. Data yang tidak valid akan ditolak oleh sistem.
+      </div>
+
+      <!-- Import Section -->
+      <div id="import-section" class="import-section" style="display: none;">
+        <h3>Import Data dari Excel (CSV)</h3>
+        <p>Upload file CSV dengan kolom: Nama, NIK, Alamat, Distrik, Kabupaten, Kecamatan, Nomor HP</p>
+        <input type="file" id="csv-file" accept=".csv" />
+        <div class="form-actions" style="display:flex; gap: 10px; margin-top: 10px;">
+          <button type="button" id="import-btn">Import</button>
+          <button type="button" id="cancel-import-btn" style="background:#e25f5f;">Batal</button>
+        </div>
+        <p id="import-error" class="error-message" role="alert"></p>
+        <div id="import-preview" style="margin-top: 15px;"></div>
+      </div>
+
+      <form id="data-form" aria-describedby="data-desc" novalidate>
+        <h2>Form Entri Data</h2>
+        <p id="data-desc">Isi form berikut untuk menambahkan atau memperbarui data penerima bantuan.</p>
+        <input type="hidden" id="entry-id" />
+        
+        <label for="nama">Nama Lengkap (sesuai KTP)</label>
+        <input type="text" id="nama" name="nama" maxlength="100" required aria-required="true" />
+        
+        <label for="nik">NIK (16 digit)</label>
+        <input type="text" id="nik" name="nik" pattern="[0-9]{16}" title="NIK harus 16 digit angka" required aria-required="true" />
+        
+        <label for="alamat">Alamat Lengkap</label>
+        <input type="text" id="alamat" name="alamat" required aria-required="true" />
+        
+        <label for="distrik">Distrik</label>
+        <input type="text" id="distrik" name="distrik" required aria-required="true" />
+        
+        <label for="kabupaten">Kabupaten</label>
+        <input type="text" id="kabupaten" name="kabupaten" required aria-required="true" />
+        
+        <label for="kecamatan">Kecamatan</label>
+        <input type="text" id="kecamatan" name="kecamatan" required aria-required="true" />
+        
+        <label for="no_hp">Nomor HP (jika ada)</label>
+        <input type="text" id="no_hp" name="no_hp" pattern="[0-9]+" title="Hanya angka yang diperbolehkan" />
+        
+        <p id="form-error" class="error-message" role="alert"></p>
+        <div class="form-actions" style="display:flex; gap: 10px;">
+          <button type="submit" id="save-btn">Simpan</button>
+          <button type="button" id="cancel-edit-btn" style="display:none; background:#e25f5f;">Batal</button>
+        </div>
+      </form>
+
+      <h2>Daftar Penerima Bantuan</h2>
+      
+      <!-- Search Bar -->
+      <div class="search-container">
+        <input type="search" id="search-input" placeholder="Cari data penerima (nama, NIK, alamat, distrik)" aria-label="Cari data penerima" />
+        <button type="button" id="search-btn">Cari</button>
+        <button type="button" id="reset-search-btn" style="background:#6c757d;">Reset</button>
+      </div>
+      
+      <table aria-live="polite" aria-relevant="all">
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>NIK</th>
+            <th>Alamat</th>
+            <th>Distrik</th>
+            <th>Kabupaten</th>
+            <th>Kecamatan</th>
+            <th>No. HP</th>
+            <th aria-label="Aksi">Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="data-table-body">
+          <!-- dynamically filled -->
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+<script>
+  (() => {
+    'use strict';
+
+    // Hardcoded user for demo purposes
+    const DEMO_USER = {
+      username: "admin",
+      password: "admin123"
+    };
+
+    // Elements
+    const loginSection = document.getElementById('login-section');
+    const crudSection = document.getElementById('crud-section');
+    const loginForm = document.getElementById('login-form');
+    const loginError = document.getElementById('login-error');
+    const logoutBtn = document.getElementById('logout-btn');
+    const importToggleBtn = document.getElementById('import-toggle-btn');
+    const importSection = document.getElementById('import-section');
+    const csvFileInput = document.getElementById('csv-file');
+    const importBtn = document.getElementById('import-btn');
+    const cancelImportBtn = document.getElementById('cancel-import-btn');
+    const importError = document.getElementById('import-error');
+    const importPreview = document.getElementById('import-preview');
+    const dataForm = document.getElementById('data-form');
+    const entryIdInput = document.getElementById('entry-id');
+    const namaInput = document.getElementById('nama');
+    const nikInput = document.getElementById('nik');
+    const alamatInput = document.getElementById('alamat');
+    const distrikInput = document.getElementById('distrik');
+    const kabupatenInput = document.getElementById('kabupaten');
+    const kecamatanInput = document.getElementById('kecamatan');
+    const noHpInput = document.getElementById('no_hp');
+    const saveBtn = document.getElementById('save-btn');
+    const cancelEditBtn = document.getElementById('cancel-edit-btn');
+    const dataTableBody = document.getElementById('data-table-body');
+    const formError = document.getElementById('form-error');
+    const searchInput = document.getElementById('search-input');
+    const searchBtn = document.getElementById('search-btn');
+    const resetSearchBtn = document.getElementById('reset-search-btn');
+
+    // Store login state and data in localStorage keys
+    const LS_KEYS = {
+      loggedIn: 'bpblPapuaTengahLoggedIn',
+      data: 'bpblPapuaTengahData'
+    };
+
+    // Initialize with sample data if empty
+    function initializeData() {
+      if (!localStorage.getItem(LS_KEYS.data)) {
+        const sampleData = [
+          {
+            nama: "Contoh Penerima",
+            nik: "1234567890123456",
+            alamat: "Jl. Contoh No. 123",
+            distrik: "Contoh Distrik",
+            kabupaten: "Contoh Kabupaten",
+            kecamatan: "Contoh Kecamatan",
+            no_hp: "081234567890"
+          }
+        ];
+        localStorage.setItem(LS_KEYS.data, JSON.stringify(sampleData));
+      }
+    }
+
+    // UTIL: Load data from localStorage
+    function loadData() {
+      const raw = localStorage.getItem(LS_KEYS.data);
+      console.log('Data loaded from localStorage:', raw);
+      if (!raw) return [];
+      try {
+        return JSON.parse(raw);
+      } catch (e) {
+        console.error('Error parsing data:', e);
+        return [];
+      }
+    }
+
+    // UTIL: Save data to localStorage
+    function saveData(data) {
+      console.log('Saving data:', data);
+      localStorage.setItem(LS_KEYS.data, JSON.stringify(data));
+    }
+
+    // UTIL: Sanitize input
+    function sanitizeInput(input) {
+      if (!input) return '';
+      return input.toString().replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // UTIL: Format NIK for display
+    function formatNIK(nik) {
+      if (!nik) return '';
+      return nik.toString().replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, '$1 $2 $3 $4');
+    }
+
+    // UTIL: Filter data based on search query
+    function filterData(data, query) {
+      if (!query) return data;
+      
+      const lowerQuery = query.toLowerCase();
+      return data.filter(item => 
+        item.nama.toLowerCase().includes(lowerQuery) ||
+        item.nik.includes(query) ||
+        item.alamat.toLowerCase().includes(lowerQuery) ||
+        item.distrik.toLowerCase().includes(lowerQuery) ||
+        item.kabupaten.toLowerCase().includes(lowerQuery) ||
+        item.kecamatan.toLowerCase().includes(lowerQuery) ||
+        (item.no_hp && item.no_hp.includes(query))
+      );
+    }
+
+    // UTIL: Check for duplicate NIK in existing data
+    function checkDuplicateNIK(data, nik, currentIndex = null) {
+      return data.some((item, index) => {
+        if (currentIndex !== null && index === currentIndex) return false;
+        return item.nik === nik;
+      });
+    }
+
+    // UTIL: Render data rows on table
+    function renderTable(data = null) {
+      const allData = loadData();
+      const dataToRender = data || allData;
+      
+      dataTableBody.innerHTML = '';
+      
+      if (dataToRender.length === 0) {
+        dataTableBody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:#666;">' + 
+          (data ? 'Tidak ditemukan data yang sesuai' : 'Belum ada data penerima') + 
+          '</td></tr>';
+        return;
+      }
+      
+      dataToRender.forEach((item, index) => {
+        const originalIndex = allData.findIndex(d => d.nik === item.nik);
+        const isDuplicate = checkDuplicateNIK(allData, item.nik, originalIndex);
+        
+        const tr = document.createElement('tr');
+        if (isDuplicate) {
+          tr.classList.add('duplicate-nik');
+        }
+        tr.innerHTML = `
+          <td>${sanitizeInput(item.nama)}</td>
+          <td>${formatNIK(item.nik)} ${isDuplicate ? '⚠️' : ''}</td>
+          <td>${sanitizeInput(item.alamat)}</td>
+          <td>${sanitizeInput(item.distrik)}</td>
+          <td>${sanitizeInput(item.kabupaten)}</td>
+          <td>${sanitizeInput(item.kecamatan)}</td>
+          <td>${item.no_hp ? sanitizeInput(item.no_hp) : '-'}</td>
+          <td>
+            <button class="action-btn" aria-label="Edit ${sanitizeInput(item.nama)}" data-action="edit" data-index="${originalIndex}">Edit</button>
+            <button class="action-btn" aria-label="Hapus ${sanitizeInput(item.nama)}" data-action="delete" data-index="${originalIndex}" style="background:#e25f5f;">Hapus</button>
+          </td>
+        `;
+        dataTableBody.appendChild(tr);
+      });
+    }
+
+    // UTIL: Reset form inputs
+    function resetForm() {
+      dataForm.reset();
+      entryIdInput.value = '';
+      saveBtn.textContent = 'Simpan';
+      cancelEditBtn.style.display = 'none';
+      formError.style.display = 'none';
+      namaInput.focus();
+    }
+
+    // Validate NIK format (16 digits)
+    function validateNIK(nik) {
+      return /^[0-9]{16}$/.test(nik);
+    }
+
+    // Show error message
+    function showError(element, message) {
+      element.textContent = message;
+      element.style.display = 'block';
+    }
+
+    // Parse CSV file
+    function parseCSV(csvText) {
+      const lines = csvText.split('\n');
+      const result = [];
+      const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+      
+      // Validate headers
+      const requiredHeaders = ['nama', 'nik', 'alamat', 'distrik', 'kabupaten', 'kecamatan'];
+      const optionalHeaders = ['no hp', 'nomor hp', 'no_hp', 'nomor_hp'];
+      const missingHeaders = requiredHeaders.filter(h => !headers.includes(h));
+      
+      if (missingHeaders.length > 0) {
+        throw new Error(`File CSV tidak memiliki kolom yang diperlukan: ${missingHeaders.join(', ')}`);
+      }
+      
+      for (let i = 1; i < lines.length; i++) {
+        if (!lines[i].trim()) continue;
+        
+        const obj = {};
+        const currentline = lines[i].split(',');
+        
+        for (let j = 0; j < headers.length; j++) {
+          const header = headers[j];
+          const value = currentline[j] ? currentline[j].trim() : '';
+          
+          if (requiredHeaders.includes(header)) {
+            obj[header] = value;
+          } else if (optionalHeaders.includes(header)) {
+            obj['no_hp'] = value;
+          }
+        }
+        
+        // Skip empty rows
+        if (Object.values(obj).filter(val => requiredHeaders.some(h => obj[h] === val)).every(val => !val)) continue;
+        
+        result.push(obj);
+      }
+      
+      return result;
+    }
+
+    // Preview CSV data with duplicate checking
+    function previewCSVData(csvData, existingData) {
+      if (!csvData || csvData.length === 0) {
+        importPreview.innerHTML = '<p>Tidak ada data yang valid dalam file CSV.</p>';
+        return;
+      }
+      
+      let html = '<h4>Pratinjau (5 baris pertama)</h4>';
+      html += '<div style="overflow-x: auto;"><table style="width:100%; border-collapse: collapse; margin-top:10px;">';
+      html += '<thead><tr><th>Status</th><th>Nama</th><th>NIK</th><th>Alamat</th><th>Distrik</th><th>Kabupaten</th><th>Kecamatan</th><th>No. HP</th></tr></thead><tbody>';
+      
+      const previewRows = csvData.slice(0, 5);
+      previewRows.forEach(row => {
+        const isDuplicate = existingData.some(item => item.nik === row.nik);
+        const rowClass = isDuplicate ? 'duplicate-nik' : '';
+        
+        html += `<tr class="${rowClass}">
+          <td style="border:1px solid #ddd; padding:8px;">${isDuplicate ? '⚠️ Duplikat' : '✔️ Baru'}</td>
+          <td style="border:1px solid #ddd; padding:8px;">${sanitizeInput(row.nama || '')}</td>
+          <td style="border:1px solid #ddd; padding:8px;">${row.nik ? formatNIK(row.nik) : ''}</td>
+          <td style="border:1px solid #ddd; padding:8px;">${sanitizeInput(row.alamat || '')}</td>
+          <td style="border:1px solid #ddd; padding:8px;">${sanitizeInput(row.distrik || '')}</td>
+          <td style="border:1px solid #ddd; padding:8px;">${sanitizeInput(row.kabupaten || '')}</td>
+          <td style="border:1px solid #ddd; padding:8px;">${sanitizeInput(row.kecamatan || '')}</td>
+          <td style="border:1px solid #ddd; padding:8px;">${row.no_hp ? sanitizeInput(row.no_hp) : '-'}</td>
+        </tr>`;
+      });
+      
+      if (csvData.length > 5) {
+        html += `<tr><td colspan="8" style="text-align:center; color:#666;">+ ${csvData.length - 5} baris lainnya</td></tr>`;
+      }
+      
+      // Count duplicates
+      const duplicateCount = csvData.filter(row => 
+        existingData.some(item => item.nik === row.nik)
+      ).length;
+      
+      html += '</tbody></table></div>';
+      html += `<p>Total baris yang akan diimpor: ${csvData.length}</p>`;
+      html += `<p>Data duplikat ditemukan: ${duplicateCount}</p>`;
+      html += `<p><strong>Catatan:</strong> Data dengan NIK duplikat akan diabaikan saat proses import.</p>`;
+      
+      importPreview.innerHTML = html;
+    }
+
+    // Validate imported data
+    function validateImportedData(data, existingData) {
+      const errors = [];
+      const duplicateNIKs = new Set();
+      
+      data.forEach((item, index) => {
+        const rowNumber = index + 2; // +1 for header, +1 for 0-based index
+        
+        if (!item.nama || !item.nama.trim()) {
+          errors.push(`Baris ${rowNumber}: Nama harus diisi`);
+        }
+        
+        if (!item.nik || !item.nik.trim()) {
+          errors.push(`Baris ${rowNumber}: NIK harus diisi`);
+        } else if (!validateNIK(item.nik)) {
+          errors.push(`Baris ${rowNumber}: NIK harus 16 digit angka (${item.nik})`);
+        } else if (existingData.some(existing => existing.nik === item.nik)) {
+          duplicateNIKs.add(item.nik);
+        }
+        
+        if (!item.alamat || !item.alamat.trim()) {
+          errors.push(`Baris ${rowNumber}: Alamat harus diisi`);
+        }
+        
+        if (!item.distrik || !item.distrik.trim()) {
+          errors.push(`Baris ${rowNumber}: Distrik harus diisi`);
+        }
+        if (!item.kabupaten || !item.kabupaten.trim()) {
+          errors.push(`Baris ${rowNumber}: Kabupaten harus diisi`);
+        }
+        
+        if (!item.kecamatan || !item.kecamatan.trim()) {
+          errors.push(`Baris ${rowNumber}: Kecamatan harus diisi`);
+        }
+        
+        if (item.no_hp && !/^[0-9]+$/.test(item.no_hp)) {
+          errors.push(`Baris ${rowNumber}: Nomor HP harus berupa angka (${item.no_hp})`);
+        }
+      });
+      
+      if (duplicateNIKs.size > 0) {
+        errors.push(`Ditemukan ${duplicateNIKs.size} NIK yang sudah ada dalam database: ${Array.from(duplicateNIKs).join(', ')}. Data duplikat akan diabaikan.`);
+      }
+      
+      return errors;
+    }
+
+    // LOGIN & LOGOUT
+    function checkLogin() {
+      const loggedIn = localStorage.getItem(LS_KEYS.loggedIn);
+      if (loggedIn === "true") {
+        loginSection.classList.remove('active');
+        crudSection.classList.add('active');
+        crudSection.focus();
+        renderTable();
+      } else {
+        loginSection.classList.add('active');
+        crudSection.classList.remove('active');
+        loginForm.username.focus();
+      }
+    }
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = loginForm.username.value.trim();
+      const password = loginForm.password.value;
+      
+      if (username === DEMO_USER.username && password === DEMO_USER.password) {
+        localStorage.setItem(LS_KEYS.loggedIn, "true");
+        loginError.style.display = 'none';
+        checkLogin();
+      } else {
+        showError(loginError, 'Username atau password salah.');
+      }
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem(LS_KEYS.loggedIn);
+      checkLogin();
+    });
+
+    // IMPORT HANDLERS
+    importToggleBtn.addEventListener('click', () => {
+      importSection.style.display = importSection.style.display === 'none' ? 'block' : 'none';
+      importToggleBtn.textContent = importSection.style.display === 'none' ? 'Import Data' : 'Sembunyikan';
+      importError.style.display = 'none';
+      importPreview.innerHTML = '';
+      csvFileInput.value = '';
+    });
+
+    cancelImportBtn.addEventListener('click', () => {
+      importSection.style.display = 'none';
+      importToggleBtn.textContent = 'Import Data';
+      importError.style.display = 'none';
+      importPreview.innerHTML = '';
+      csvFileInput.value = '';
+    });
+
+    csvFileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const csvData = parseCSV(event.target.result);
+          const existingData = loadData();
+          previewCSVData(csvData, existingData);
+          importError.style.display = 'none';
+        } catch (error) {
+          showError(importError, error.message);
+          importPreview.innerHTML = '';
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    importBtn.addEventListener('click', () => {
+      const file = csvFileInput.files[0];
+      if (!file) {
+        showError(importError, 'Silakan pilih file CSV terlebih dahulu.');
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const csvData = parseCSV(event.target.result);
+          const existingData = loadData();
+          
+          // Validate data
+          const validationErrors = validateImportedData(csvData, existingData);
+          
+          if (validationErrors.length > 0) {
+            showError(importError, validationErrors.join('<br>'));
+            return;
+          }
+          
+          // Process valid data (filter out duplicates)
+          const newData = csvData
+            .filter(item => !existingData.some(existing => existing.nik === item.nik))
+            .map(item => ({
+              nama: item.nama.trim(),
+              nik: item.nik.trim(),
+              alamat: item.alamat.trim(),
+              distrik: item.distrik.trim(),
+              kabupaten: item.kabupaten.trim(),
+              kecamatan: item.kecamatan.trim(),
+              no_hp: item.no_hp ? item.no_hp.trim() : ''
+            }));
+          
+          if (newData.length === 0) {
+            showError(importError, 'Tidak ada data baru yang bisa diimpor. Semua data dalam file CSV sudah ada dalam database.');
+            return;
+          }
+          
+          saveData([...existingData, ...newData]);
+          renderTable();
+          
+          // Reset import section
+          importSection.style.display = 'none';
+          importToggleBtn.textContent = 'Import Data';
+          importError.style.display = 'none';
+          importPreview.innerHTML = '';
+          csvFileInput.value = '';
+          
+          alert(`Berhasil mengimpor ${newData.length} data penerima baru.`);
+        } catch (error) {
+          showError(importError, error.message);
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    // CRUD FORM HANDLERS
+    dataForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Validate inputs
+      const nama = namaInput.value.trim();
+      const nik = nikInput.value.trim();
+      const alamat = alamatInput.value.trim();
+      const distrik = distrikInput.value.trim();
+      const kabupaten = kabupatenInput.value.trim();
+      const kecamatan = kecamatanInput.value.trim();
+      const no_hp = noHpInput.value.trim();
+
+      // Clear previous errors
+      formError.style.display = 'none';
+
+      if (!nama || !nik || !alamat || !distrik || !kabupaten || !kecamatan) {
+        showError(formError, 'Harap isi semua field yang wajib diisi.');
+        return;
+      }
+      
+      if (!validateNIK(nik)) {
+        showError(formError, 'NIK harus 16 digit angka.');
+        nikInput.focus();
+        return;
+      }
+      
+      if (no_hp && !/^[0-9]+$/.test(no_hp)) {
+        showError(formError, 'Nomor HP harus berupa angka.');
+        noHpInput.focus();
+        return;
+      }
+
+      const data = loadData();
+      const entryId = entryIdInput.value;
+
+      // Check for duplicate NIK (only for new entries)
+      if (!entryId && checkDuplicateNIK(data, nik)) {
+        showError(formError, 'NIK sudah terdaftar dalam sistem.');
+        nikInput.focus();
+        return;
+      }
+
+      if (entryId) {
+        // Update existing
+        const idx = parseInt(entryId);
+        if (idx >= 0 && idx < data.length) {
+          data[idx] = { 
+            nama, 
+            nik, 
+            alamat, 
+            distrik, 
+            kabupaten,
+            kecamatan, 
+            no_hp 
+          };
+          console.log('Updating entry at index:', idx);
+        }
+      } else {
+        // Add new
+        data.push({ 
+          nama, 
+          nik, 
+          alamat, 
+          distrik, 
+          kabupaten,
+          kecamatan, 
+          no_hp 
+        });
+        console.log('Adding new entry');
+      }
+
+      saveData(data);
+      renderTable();
+      resetForm();
+    });
+
+    cancelEditBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      resetForm();
+    });
+
+    // SEARCH FUNCTIONALITY
+    function performSearch() {
+      const query = searchInput.value.trim();
+      const data = loadData();
+      const filteredData = filterData(data, query);
+      renderTable(filteredData);
+    }
+
+    searchBtn.addEventListener('click', performSearch);
+
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        performSearch();
+      }
+    });
+
+    resetSearchBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      renderTable();
+    });
+
+    // HANDLE EDIT & DELETE BUTTONS
+    dataTableBody.addEventListener('click', (e) => {
+      if (!e.target.matches('button.action-btn')) return;
+
+      const action = e.target.dataset.action;
+      const index = parseInt(e.target.dataset.index);
+      const data = loadData();
+
+      if (action === "edit") {
+        if (index >= 0 && index < data.length) {
+          const item = data[index];
+          entryIdInput.value = index;
+          namaInput.value = item.nama;
+          nikInput.value = item.nik;
+          alamatInput.value = item.alamat;
+          distrikInput.value = item.distrik;
+          kabupatenInput.value = item.kabupaten;
+          kecamatanInput.value = item.kecamatan;
+          noHpInput.value = item.no_hp || '';
+          saveBtn.textContent = 'Update';
+          cancelEditBtn.style.display = 'inline-block';
+          namaInput.focus();
+        }
+      }
+
+      if (action === "delete") {
+        if (index >= 0 && index < data.length) {
+          if (confirm(`Apakah Anda yakin ingin menghapus data penerima "${data[index].nama}"?`)) {
+            data.splice(index, 1);
+            saveData(data);
+            renderTable();
+            // Reset form only if we were editing the deleted item
+            if (entryIdInput.value && parseInt(entryIdInput.value) === index) {
+              resetForm();
+            }
+          }
+        }
+      }
+    });
+
+    // On page load, check login state and initialize data
+    initializeData();
+    checkLogin();
+  })();
+</script>
+</body>
+</html>

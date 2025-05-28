@@ -121,3 +121,8 @@ const memento_exercise = document.getElementById('memento_exercise');
 memento_exercise.addEventListener("click", () => {
     window.open("https://aenjeaer.github.io/portfolio/pages/memento_exercise/index_mementoexercise.html", "_blank");
 })
+// sistem BPBL
+const sistem_BPBL = document.getElementById('sistem_BPBL');
+sistem_BPBL.addEventListener("click", () => {
+    window.open("https://aenjeaer.github.io/portfolio/pages/Sistem_BPBL/index_sistem_BPBL", "_blank");
+})
